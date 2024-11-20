@@ -16,4 +16,4 @@ jobs:
       
     - name: PR
       if: github.event_name == 'pull_request'
-      run: echo "¿Se ha detectado un pull_request!"  
+      run: echo "¡Se ha detectado un pull_request!"  
