@@ -29,9 +29,10 @@
 
        - name: Minify JavaScript
          run: | 
-            for file in *.js; 
-            do minify "$file" > "${file%.js}.min.js" 
-            done
+              for file in *.js; 
+              do if [[ "$file" != *.min.js ]]; 
+              then minify "$file" > "${file%.js}.min.js" 
+              fi done
 
        - name: Commit minified file
          uses: stefanzweifel/git-auto-commit-action@v5
