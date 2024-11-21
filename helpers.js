@@ -21,14 +21,12 @@ function confirmarEliminacion(url, id, type = null, tableId = null) {
             $.ajax({
                 url: url + '/' + id,
                 success: function (response) {
-                    // Si la respuesta es success
                     if (response.type === 1) {
                         Swal.fire(
                             'Operación realizada con éxito.',
                             response.message,
                             'success'
                         ).then(() => {
-                            // Recargar el DataTable
                             $('#' + tableId).DataTable().ajax.reload();
                         });
                     } else {
@@ -40,7 +38,6 @@ function confirmarEliminacion(url, id, type = null, tableId = null) {
                     }
                 },
                 error: function () {
-                    // Si ocurre un error en la petición AJAX
                     Swal.fire(
                         'Error',
                         'Ocurrió un problema en el servidor.',
