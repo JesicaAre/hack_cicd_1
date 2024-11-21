@@ -1,5 +1,13 @@
 name: telegram message
-on: push
+on: 
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
 jobs:
 
   build:
@@ -7,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message on push
+        if: github.event_name == 'push'
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -14,4 +23,14 @@ jobs:
           message: |
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
+            Repository: ${{ github.repository }}
+
+      - name: send telegram message on pull_request
+        if: github.event_name == 'pull_request'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ${{ github.actor }} created pull_request:
             Repository: ${{ github.repository }}
