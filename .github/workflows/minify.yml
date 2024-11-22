@@ -6,6 +6,11 @@
        - develop
        - main
 
+   pull_request_target:
+     branches:
+       - develop
+       - main
+
        
  jobs:
 
